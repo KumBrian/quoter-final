@@ -1,14 +1,14 @@
 class QuoteModel {
-  int id;
-  String author;
-  String quote;
-  bool isLiked;
+  final int id;
+  final String author;
+  final String quote;
+  final bool isLiked;
 
   QuoteModel(
       {required this.id,
       required this.author,
       required this.quote,
-      required this.isLiked});
+      this.isLiked = false});
 
   QuoteModel toggleLiked() {
     return QuoteModel(
@@ -16,6 +16,14 @@ class QuoteModel {
       author: author,
       quote: quote,
       isLiked: !isLiked,
+    );
+  }
+
+  factory QuoteModel.fromJson(List json) {
+    return QuoteModel(
+      id: DateTime.now().millisecondsSinceEpoch,
+      quote: json[0]['quote'],
+      author: json[0]['author'],
     );
   }
 }

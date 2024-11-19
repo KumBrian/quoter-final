@@ -1,23 +1,16 @@
-import 'package:hive/hive.dart';
+import 'package:isar/isar.dart';
 import 'package:quoter_final/domain/models/quote_model.dart';
 
-part 'hive_quote.g.dart';
+part 'isar_liked_quote.g.dart';
 
-@HiveType(typeId: 0)
-class QuoteHive extends HiveObject {
-  @HiveField(0)
-  int id;
+@collection
+class IsarLikedQuoted {
+  Id id = Isar.autoIncrement;
+  late String author;
+  late String quote;
+  late bool isLiked;
 
-  @HiveField(1)
-  String author;
-
-  @HiveField(2)
-  String quote;
-
-  @HiveField(3)
-  bool isLiked;
-
-  QuoteHive(
+  IsarLikedQuoted(
       {required this.id,
       required this.author,
       required this.quote,
@@ -32,8 +25,8 @@ class QuoteHive extends HiveObject {
     );
   }
 
-  static QuoteHive fromDomain(QuoteModel quoteModel) {
-    return QuoteHive(
+  static IsarLikedQuoted fromDomain(QuoteModel quoteModel) {
+    return IsarLikedQuoted(
       id: quoteModel.id,
       author: quoteModel.author,
       quote: quoteModel.quote,
